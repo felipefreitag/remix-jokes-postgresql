@@ -8,7 +8,7 @@ datasource db {
 }
 
 model jokes {
-  id         String    @id @unique @db.VarChar(50)
+  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   created_at DateTime? @default(now()) @db.Timestamp(6)
   updated_at DateTime? @db.Timestamp(6)
   name       String?   @db.VarChar(250)
