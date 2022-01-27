@@ -9,10 +9,10 @@ datasource db {
 
 model Joke {
   id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at DateTime? @default(now()) @db.Timestamp(6)
+  created_at DateTime  @default(now()) @db.Timestamp(6)
   updated_at DateTime? @db.Timestamp(6)
   name       String    @db.VarChar(250)
-  content    String?
+  content    String
 
   @@map("joke")
 }

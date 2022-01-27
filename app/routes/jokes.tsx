@@ -7,7 +7,11 @@ type LoaderData = { jokes: Array<{ id: string; name: string }> }
 
 export let loader: LoaderFunction = async () => {
   const data: LoaderData = {
-    jokes: await db.joke.findMany(),
+    jokes: await db.joke.findMany({
+      take: 5,
+      select: { id: true, name: true },
+      orderBy: { created_at: 'desc' },
+    }),
   }
 
   return data
