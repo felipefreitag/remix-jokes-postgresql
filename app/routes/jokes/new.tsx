@@ -1,6 +1,7 @@
 import type { ActionFunction } from 'remix'
-import { redirect, useActionData, json } from 'remix'
+import { useActionData, redirect, json } from 'remix'
 import { db } from '~/utils/db.server'
+import { requireUserId } from '~/utils/session.server'
 
 function validateJokeContent(content: string) {
   if (content.length < 10) {
@@ -29,10 +30,10 @@ type ActionData = {
 const badRequest = (data: ActionData) => json(data, { status: 400 })
 
 export const action: ActionFunction = async ({ request }) => {
+  const userId = await requireUserId(request)
   const form = await request.formData()
   const name = form.get('name')
   const content = form.get('content')
-
   if (typeof name !== 'string' || typeof content !== 'string') {
     return badRequest({
       formError: `Form not submitted correctly.`,
@@ -44,11 +45,13 @@ export const action: ActionFunction = async ({ request }) => {
     content: validateJokeContent(content),
   }
   const fields = { name, content }
-
   if (Object.values(fieldErrors).some(Boolean)) {
     return badRequest({ fieldErrors, fields })
   }
-  const joke = await db.joke.create({ data: fields })
+
+  const joke = await db.joke.create({
+    data: { ...fields, jokester_id: userId },
+  })
   return redirect(`/jokes/${joke.id}`)
 }
 
@@ -63,8 +66,8 @@ export default function NewJokeRoute() {
           <label>
             Name:{' '}
             <input
-              defaultValue={actionData?.fields?.name}
               type="text"
+              defaultValue={actionData?.fields?.name}
               name="name"
               aria-invalid={Boolean(actionData?.fieldErrors?.name) || undefined}
               aria-describedby={
