@@ -22,6 +22,7 @@ export const links: LinksFunction = () => {
 }
 
 export default function JokesRoute() {
+  // Add data type assertion here with Zod
   const data = useLoaderData<LoaderData>()
 
   return (
