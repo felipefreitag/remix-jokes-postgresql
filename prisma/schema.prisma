@@ -11,7 +11,7 @@ model Joke {
   id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created_at DateTime? @default(now()) @db.Timestamp(6)
   updated_at DateTime? @db.Timestamp(6)
-  name       String?   @db.VarChar(250)
+  name       String    @db.VarChar(250)
   content    String?
 
   @@map("joke")

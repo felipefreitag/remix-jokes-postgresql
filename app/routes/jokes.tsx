@@ -1,8 +1,8 @@
 import { Outlet, Link, useLoaderData } from 'remix'
 import type { LinksFunction, LoaderFunction } from 'remix'
-import stylesUrl from '../styles/jokes.css'
 import type { Joke } from '@prisma/client'
 import { db } from '~/utils/db.server'
+import stylesUrl from '~/styles/jokes.css'
 
 type LoaderData = { jokes: Array<Joke> }
 export let loader: LoaderFunction = async () => {
@@ -39,7 +39,7 @@ export default function JokesRoute() {
             <p>Here are a few more jokes to check out:</p>
             <ul>
               {data.jokes.map((joke) => (
-                <li>
+                <li key={joke.id}>
                   <Link to={joke.id}>{joke.name}</Link>
                 </li>
               ))}
