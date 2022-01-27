@@ -15,13 +15,13 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function JokeRoute() {
   const data = useLoaderData<LoaderData>()
-  const { content } = data.joke
+  const { name, content } = data.joke
 
   return (
     <div>
       <p>Here's your hilarious joke:</p>
       <p>{content}</p>
-      <Link to=".">{data.joke.name} Permalink</Link>
+      <Link to=".">{name}Permalink</Link>
     </div>
   )
 }
