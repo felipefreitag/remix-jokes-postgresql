@@ -1,10 +1,10 @@
 import { Outlet, Link, useLoaderData } from 'remix'
 import type { LinksFunction, LoaderFunction } from 'remix'
-import type { Joke } from '@prisma/client'
 import { db } from '~/utils/db.server'
 import stylesUrl from '~/styles/jokes.css'
 
-type LoaderData = { jokes: Array<Joke> }
+type LoaderData = { jokes: Array<{ id: string; name: string }> }
+
 export let loader: LoaderFunction = async () => {
   const data: LoaderData = {
     jokes: await db.joke.findMany(),
