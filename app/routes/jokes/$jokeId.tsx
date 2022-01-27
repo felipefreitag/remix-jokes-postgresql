@@ -21,7 +21,7 @@ export default function JokeRoute() {
     <div>
       <p>Here's your hilarious joke:</p>
       <p>{content}</p>
-      <Link to=".">{name}Permalink</Link>
+      <Link to=".">{name} Permalink</Link>
     </div>
   )
 }
