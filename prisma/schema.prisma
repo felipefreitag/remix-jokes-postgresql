@@ -7,12 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  username     String   @unique
+  passwordHash String
+  jokes        Joke[]
+
+  @@map("users")
+}
+
 model Joke {
-  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at DateTime  @default(now()) @db.Timestamp(6)
-  updated_at DateTime? @db.Timestamp(6)
-  name       String    @db.VarChar(250)
-  content    String
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at  DateTime  @default(now()) @db.Timestamp(6)
+  updated_at  DateTime? @db.Timestamp(6)
+  name        String    @db.VarChar(250)
+  content     String
+  jokester_id String    @db.Uuid
+  jokester    User      @relation(fields: [jokester_id], references: [id], onDelete: Cascade)
 
   @@map("joke")
 }
