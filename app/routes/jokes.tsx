@@ -1,6 +1,10 @@
-import { Outlet, Link } from 'remix'
-import type { LinksFunction } from 'remix'
+import { Outlet, Link, useLoaderData } from 'remix'
+import type { LinksFunction, LoaderFunction } from 'remix'
 import stylesUrl from '../styles/jokes.css'
+import type { Joke } from '@prisma/client'
+import { db } from '~/utils/db.server'
+
+type LoaderData = { jokes: Array<Joke> }
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: stylesUrl }]
