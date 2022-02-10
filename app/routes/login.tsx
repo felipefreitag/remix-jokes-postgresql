@@ -90,10 +90,7 @@ export const action: ActionFunction = async ({ request }) => {
           formError: `Something went wrong trying to create a new user.`,
         })
       }
-      return badRequest({
-        fields,
-        formError: 'Not implemented',
-      })
+      return createUserSession(user.id, redirectTo)
     }
     default: {
       return badRequest({
