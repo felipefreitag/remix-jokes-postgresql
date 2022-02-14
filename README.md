@@ -1,11 +1,41 @@
-# Welcome to Remix!
+# Remix Jokes tutorial with Postgresql on Heroku
 
 - [Remix Docs](https://remix.run/docs)
 
+## See it live
+
+https://remix-jokes-postgres.herokuapp.com/
+
 ## Development
 
-From your terminal:
+#### Install dependencies
+```sh
+npm install
+```
 
+#### Create a `jokes` db on your local Postgresql server.
+```
+psql
+> CREATE DATABASE jokes;
+```
+
+#### Prepare .env
+```sh
+cp .env.sample .env
+```
+Add the DB URL and any string for the session secret.
+
+#### Migrate db
+```
+npx prisma migrate
+```
+
+#### (Optional) Seed db
+```
+npx prisma db seed
+```
+
+#### Run
 ```sh
 npm run dev
 ```
@@ -14,19 +44,7 @@ This starts your app in development mode, rebuilding assets on file changes.
 
 ## Deployment
 
-First, build your app for production:
 
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
 
 ### DIY
 
