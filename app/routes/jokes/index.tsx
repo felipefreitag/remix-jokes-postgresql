@@ -23,13 +23,13 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function JokesIndexRoute() {
   const data = useLoaderData<LoaderData>()
-  const { name, content } = data.joke
+  const { name, content, id } = data.joke
 
   return (
     <div>
       <p>Here's a random joke:</p>
       <p>{content}</p>
-      <Link to=".">{name} Permalink</Link>
+      <Link to={id}>{name} Permalink</Link>
     </div>
   )
 }
