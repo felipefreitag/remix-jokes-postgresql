@@ -1,12 +1,6 @@
 import { User } from '@prisma/client'
-import {
-  Link,
-  LinksFunction,
-  LoaderFunction,
-  Outlet,
-  useLoaderData,
-  Form,
-} from 'remix'
+import { Link, Outlet, useLoaderData, Form } from '@remix-run/react'
+import { LinksFunction, LoaderFunction } from '@remix-run/node'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import stylesUrl from '../styles/jokes.css'

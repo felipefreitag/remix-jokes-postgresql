@@ -1,4 +1,4 @@
-import { Link, Form } from 'remix'
+import { Link, Form } from '@remix-run/react'
 import type { Joke } from '@prisma/client'
 
 export function JokeDisplay({
