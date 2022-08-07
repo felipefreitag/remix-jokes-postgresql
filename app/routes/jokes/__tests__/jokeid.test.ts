@@ -1,7 +1,8 @@
 import { loader } from '../$jokeId'
 
 describe('loader', () => {
-  it('foo', () => {
-    expect(true).toBe(true)
+  it('foo', async () => {
+    const request = new Request('http://foo.ber')
+    expect(await loader({ request, context: {}, params: {} })).toEqual(true)
   })
 })
