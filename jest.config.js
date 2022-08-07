@@ -33,6 +33,15 @@ module.exports = {
     'tests/(.*)': fromRoot('tests/$1'),
   },
 
+  transform: {
+    '^.+\\.[tj]sx?$': 'ts-jest',
+  },
+  globals: {
+    'ts-jest': {
+      isolatedModules: true,
+    },
+  },
+
   // The test environment that will be used for testing
   testEnvironment: 'node',
 }
