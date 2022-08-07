@@ -37,6 +37,10 @@ export const meta: MetaFunction = ({
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const userId = await getUserId(request)
+  if (!params.jokeId) {
+    throw new Response('Id is required', { status: 400 })
+  }
+
   const joke = await db.joke.findUnique({
     where: { id: params.jokeId },
   })
