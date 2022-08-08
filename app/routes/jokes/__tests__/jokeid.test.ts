@@ -33,10 +33,24 @@ describe('loader', () => {
   })
 
   it('returns the joke when it is found', async () => {
-    const request = new Request('http://foo.ber')
+    const kody = await db.user.create({
+      data: {
+        username: 'kody',
+        // this is a hashed version of "twixrox"
+        passwordHash:
+          '$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u',
+      },
+    })
 
-    const jokes = await db.joke.findMany({ take: 1 })
-    const joke = jokes[0]
+    const joke = await db.joke.create({
+      data: {
+        jokester_id: kody.id,
+        name: 'Road worker',
+        content: `I never wanted to believe that my Dad was stealing from his job as a road worker. But when I got home, all the signs were there.`,
+      },
+    })
+
+    const request = new Request('http://foo.ber')
     const { id } = joke
 
     let result
