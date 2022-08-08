@@ -4,6 +4,7 @@ let db: PrismaClient
 
 declare global {
   var __db: PrismaClient | undefined
+  var testWithMutation: jest.It
 }
 
 // this is needed because in development we don't want to restart
