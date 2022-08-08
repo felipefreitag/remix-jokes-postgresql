@@ -32,7 +32,7 @@ describe('loader', () => {
     expect((result as Response).status).toEqual(404)
   })
 
-  it('returns the joke when it is found', async () => {
+  testWithMutation('returns the joke when it is found', async () => {
     const kody = await db.user.create({
       data: {
         username: 'kody',
