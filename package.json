@@ -8,8 +8,7 @@
     "dev": "remix dev",
     "postinstall": "remix setup node",
     "start": "remix-serve build",
-    "pretest": "./scripts/setup-test-database.sh",
-    "test": "./scripts/run-in-test-database.sh jest --watch --runInBand"
+    "test": "jest --watch"
   },
   "dependencies": {
     "@prisma/client": "^3.8.1",
