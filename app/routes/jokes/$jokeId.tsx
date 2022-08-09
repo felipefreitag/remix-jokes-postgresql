@@ -38,8 +38,10 @@ export const meta: MetaFunction = ({
 export const loader: LoaderFunction = async ({ request, params }) => {
   const userId = await getUserId(request)
 
-  if (!params.jokeId) {
-    throw new Response('Id is required', { status: 400 })
+  const jokeId = params.jokeId || ''
+
+  if (![32, 36].includes(jokeId.length)) {
+    throw new Response('Joke id must be 32 or 36 characters', { status: 400 })
   }
 
   const joke = await db.joke.findUnique({
